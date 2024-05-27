@@ -1,42 +1,35 @@
 import * as ex from "excalibur";
 import { Block1 } from "./block1";
-import { Vector } from "excalibur";
 import { Player, PlayerDirection } from "./player";
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;
     player!: Player;
+    blocks!: Block1[];
 
     onInitialize(engine: ex.Engine) 
     {
-        this.block1 = new Block1();
-        this.add(this.block1);
+        this.blocks = [];
+
+        let cellRowCount = 30;
+        let cellColCount = 60;
+
+        for (let i = 0; i < 200; i++) {
+            
+            let cellRow = Math.floor(Math.random() * cellRowCount);
+            let cellCol = Math.floor(Math.random() * cellColCount);
+                        
+            const block = new Block1(cellRow, cellCol);
+            this.add(block);
+            this.blocks.push(block);
+        }        
 
         this.player = new Player();
         this.add(this.player);
+        this.handleInput(engine);
+    }
 
-        /*
-        const sheet = ex.SpriteSheet.fromImageSource({
-            image: Resources.BeetleImage,
-            grid: {
-                spriteWidth: 64,
-                spriteHeight: 64,
-                rows: 1,
-                columns: 3,
-            },
-        });
-        */
-
-        /*
-        this.animation = ex.Animation.fromSpriteSheet(
-            sheet,
-            [0, 1, 2],
-            100,
-            ex.AnimationStrategy.PingPong
-        );
-        this.graphics.use(this.animation);
-        */
-
+    private handleInput(engine: ex.Engine<any>) {
         engine.input.keyboard.on("hold", (evt) => {
             let dir = PlayerDirection.Down;
             switch (evt.key) {

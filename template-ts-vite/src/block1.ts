@@ -1,17 +1,22 @@
 import { Actor, CollisionType, vec } from "excalibur";
 import { Resources } from "./resources";
+import { GameConstants } from "./game-constants";
 
 export class Block1 extends Actor
 {
-    constructor()
+    constructor(
+        public cellRow: number, 
+        public cellCol: number
+    )
     {
+        const y = cellRow * GameConstants.GridSize;
+        const x = cellCol * GameConstants.GridSize;
         super({
-            pos: vec(30, 30),
-            width: 16,
-            height: 16,
+            pos: vec(x, y),
+            width: GameConstants.GridSize,
+            height: GameConstants.GridSize,
             collisionType: CollisionType.Fixed
         })
-
     }
 
     onInitialize() {
