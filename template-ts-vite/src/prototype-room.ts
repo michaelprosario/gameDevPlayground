@@ -14,7 +14,7 @@ export class ProtoTypeRoom extends ex.Scene {
         let cellRowCount = 30;
         let cellColCount = 60;
 
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 250; i++) {
             
             let cellRow = Math.floor(Math.random() * cellRowCount);
             let cellCol = Math.floor(Math.random() * cellColCount);
