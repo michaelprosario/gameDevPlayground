@@ -18,6 +18,6 @@ export class Block1 extends Actor
         this.on('pointerup', () => {
           alert('yo');
         });
-      }        
+    }        
 
 }
