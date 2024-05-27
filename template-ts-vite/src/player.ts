@@ -1,4 +1,4 @@
-import { Actor, Sprite, Vector, vec } from "excalibur";
+import { Actor, CollisionType, Sprite, Vector, vec } from "excalibur";
 import { Resources } from "./resources";
 
 export enum PlayerState
@@ -25,12 +25,14 @@ export class Player extends Actor {
       super({
           pos: vec(60, 60),
           width: 16,
-          height: 16
+          height: 16, 
+          collisionType: CollisionType.Active
       })
   }
 
   onInitialize() 
   {
+    
     this.state = PlayerState.CanMove;
     this.direction = PlayerDirection.Left;
 

@@ -1,4 +1,4 @@
-import { Actor, vec } from "excalibur";
+import { Actor, CollisionType, vec } from "excalibur";
 import { Resources } from "./resources";
 
 export class Block1 extends Actor
@@ -8,7 +8,8 @@ export class Block1 extends Actor
         super({
             pos: vec(30, 30),
             width: 16,
-            height: 16
+            height: 16,
+            collisionType: CollisionType.Fixed
         })
 
     }
