@@ -1,32 +1,49 @@
 import * as ex from "excalibur";
 import { Block1 } from "./block1";
 import { Player, PlayerDirection } from "./player";
+import { TileMapLoader } from "./tile-map-loader";
+import { TileMapData } from "./tile-map-data";
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;
     player!: Player;
     blocks!: Block1[];
 
-    onInitialize(engine: ex.Engine) 
+    async onInitialize(engine: ex.Engine) 
     {
         this.blocks = [];
 
-        let cellRowCount = 30;
-        let cellColCount = 60;
-
-        for (let i = 0; i < 250; i++) {
-            
-            let cellRow = Math.floor(Math.random() * cellRowCount);
-            let cellCol = Math.floor(Math.random() * cellColCount);
-                        
-            const block = new Block1(cellRow, cellCol);
-            this.add(block);
-            this.blocks.push(block);
-        }        
+        const tileMapLoader = new TileMapLoader();
+        let tileMapData: TileMapData = await tileMapLoader.loadTileMap("/src/maps/map2.json");
+        for(let tile of tileMapData.layers[0].tiles){
+            if(tile.id== "0")
+            {
+                const block = new Block1(tile.x, tile.y);
+                this.add(block);
+                this.blocks.push(block);    
+            }
+        }
+        
+        // this.createRandomRoom();             
 
         this.player = new Player();
         this.add(this.player);
         this.handleInput(engine);
+    }
+
+    private createRandomRoom() {
+        let cellRowCount = 30;
+        let cellColCount = 60;
+
+        for (let i = 0; i < 250; i++) {
+
+            let cellRow = Math.floor(Math.random() * cellRowCount);
+            let cellCol = Math.floor(Math.random() * cellColCount);
+
+            const block = new Block1(cellRow, cellCol);
+            this.add(block);
+            this.blocks.push(block);
+        }
     }
 
     private handleInput(engine: ex.Engine<any>) {
@@ -60,8 +77,6 @@ export class ProtoTypeRoom extends ex.Scene {
      */
     movePlayerInDirection(direction: PlayerDirection) 
     {
-        console.log("moveInDirection...");
-        console.log(direction);
         this.player.movePlayerInDirection(direction);
     }    
 }
