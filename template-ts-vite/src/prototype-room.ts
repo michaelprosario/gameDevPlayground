@@ -1,8 +1,8 @@
 import * as ex from "excalibur";
 import { Block1 } from "./block1";
 import { Player, PlayerDirection } from "./player";
-import { TileMapLoader } from "./tile-map-loader";
-import { TileMapData } from "./tile-map-data";
+import { SpriteFusionTileMapLoader } from "./sprite-fusion-tile-map-loader";
+import { SpriteFusionTileMapData } from "./sprite-fusion-tile-map-data";
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;
@@ -13,10 +13,13 @@ export class ProtoTypeRoom extends ex.Scene {
     {
         this.blocks = [];
 
-        const tileMapLoader = new TileMapLoader();
-        let tileMapData: TileMapData = await tileMapLoader.loadTileMap("/src/maps/map2.json");
-        for(let tile of tileMapData.layers[0].tiles){
-            if(tile.id== "0")
+        const tileMapLoader = new SpriteFusionTileMapLoader();
+        let tileMapData: SpriteFusionTileMapData
+        tileMapData = await tileMapLoader.loadTileMap("/src/maps/spriteFusionMap.json");
+        
+        for(let tile of tileMapData.layers[0].tiles)
+        {            
+            if(tile.id==="40")
             {
                 const block = new Block1(tile.x, tile.y);
                 this.add(block);
@@ -31,20 +34,20 @@ export class ProtoTypeRoom extends ex.Scene {
         this.handleInput(engine);
     }
 
-    private createRandomRoom() {
-        let cellRowCount = 30;
-        let cellColCount = 60;
+    // private createRandomRoom() {
+    //     let cellRowCount = 30;
+    //     let cellColCount = 60;
 
-        for (let i = 0; i < 250; i++) {
+    //     for (let i = 0; i < 250; i++) {
 
-            let cellRow = Math.floor(Math.random() * cellRowCount);
-            let cellCol = Math.floor(Math.random() * cellColCount);
+    //         let cellRow = Math.floor(Math.random() * cellRowCount);
+    //         let cellCol = Math.floor(Math.random() * cellColCount);
 
-            const block = new Block1(cellRow, cellCol);
-            this.add(block);
-            this.blocks.push(block);
-        }
-    }
+    //         const block = new Block1(cellRow, cellCol);
+    //         this.add(block);
+    //         this.blocks.push(block);
+    //     }
+    // }
 
     private handleInput(engine: ex.Engine<any>) {
         engine.input.keyboard.on("hold", (evt) => {
