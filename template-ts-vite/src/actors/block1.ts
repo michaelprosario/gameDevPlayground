@@ -1,6 +1,6 @@
 import { Actor, CollisionType, vec } from "excalibur";
-import { Resources } from "./resources";
-import { GameConstants } from "./game-constants";
+import { Resources } from "../resources";
+import { GameConstants } from "../game-constants";
 
 export class Block1 extends Actor
 {

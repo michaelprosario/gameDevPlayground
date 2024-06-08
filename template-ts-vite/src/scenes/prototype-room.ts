@@ -1,8 +1,8 @@
 import * as ex from "excalibur";
-import { Block1 } from "./block1";
-import { Player, PlayerDirection } from "./player";
-import { TileMapLoader } from "./tile-map-loader";
-import { TileMapData } from "./tile-map-data";
+import { Block1 } from "../actors/block1";
+import { Player, PlayerDirection } from "../actors/player";
+import { TileMapLoader } from "../tile-map-loader";
+import { TileMapData } from "../tile-map-data";
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;

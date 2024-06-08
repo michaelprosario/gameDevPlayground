@@ -1,6 +1,6 @@
 import { Engine } from "excalibur";
 import { loader } from "./resources";
-import { ProtoTypeRoom } from "./prototype-room";
+import { ProtoTypeRoom } from "./scenes/prototype-room";
 
 class Game extends Engine {
     constructor() {
