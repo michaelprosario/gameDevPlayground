@@ -7,3 +7,7 @@
 3. Run `npm install` to install dependencies
 4. Run `npm run dev` to start the Vite server!
 5. Have fun!
+
+
+# Reference
+- https://www.typescriptbites.io/articles/build-test-and-publish-typescript-npm-package-2022
