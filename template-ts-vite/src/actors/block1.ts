@@ -5,12 +5,10 @@ import { GameConstants } from "../game-constants";
 export class Block1 extends Actor
 {
     constructor(
-        public cellCol: number, 
-        public cellRow: number
+        public x: number, 
+        public y: number
     )
     {
-        const y = cellRow * GameConstants.GridSize;
-        const x = cellCol * GameConstants.GridSize;
         super({
             pos: vec(x, y),
             width: GameConstants.GridSize,
