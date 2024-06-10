@@ -4,27 +4,65 @@ import { Block1 } from "../actors/block1";
 import { Player, PlayerDirection } from "../actors/player";
 import { SpriteFusionTileMapData } from "../interfaces/sprite-fusion-tile-map-data";
 import { SpriteFusionTileMapLoader } from "../services/sprite-fusion-tile-map-loader";
+import { Resources } from "../resources";
+import { Door1 } from "../actors/door1";
+import { Coin1 } from "../actors/coin1";
+import { Key1 } from "../actors/key1";
+
+export class MapRoomTileType
+{
+    static BRICK_WALL = "18";
+    static DOOR1 = "117";
+    static COIN1 = "17";
+    static KEY1 = "373";
+}
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;
     player!: Player;
-    blocks!: Block1[];
+    mapSpriteSheet!: ex.SpriteSheet;
 
     async onInitialize(engine: ex.Engine) 
     {
-        this.blocks = [];
-
         const tileMapLoader = new SpriteFusionTileMapLoader();
         let tileMapData: SpriteFusionTileMapData
-        tileMapData = await tileMapLoader.loadTileMap("/src/maps/spriteFusionMap.json");
+        tileMapData = await tileMapLoader.loadTileMap("/src/maps/map2.json");
+        console.log(tileMapData);
+
+        this.mapSpriteSheet = ex.SpriteSheet.fromImageSource({
+            image: Resources.MapSpritesImage,
+            grid: {
+                rows: 33,
+                columns: 14,
+                spriteHeight: 32,
+                spriteWidth: 32
+            }
+          });
         
         for(let tile of tileMapData.layers[0].tiles)
         {            
-            if(tile.id==="40")
+            if(tile.id === MapRoomTileType.BRICK_WALL)
             {
-                const block = new Block1(tile.x, tile.y);
+                const block = new Block1(tile.x, tile.y, this.mapSpriteSheet);
                 this.add(block);
-                this.blocks.push(block);    
+            }
+            else if(tile.id === MapRoomTileType.COIN1)
+            {
+                const actor = new Coin1(tile.x, tile.y, this.mapSpriteSheet);
+                this.add(actor);
+            }
+            else if(tile.id === MapRoomTileType.DOOR1)
+            {
+                 const actor = new Door1(tile.x, tile.y, this.mapSpriteSheet);
+                 this.add(actor);
+            }
+            else if(tile.id === MapRoomTileType.KEY1)
+            {
+                 const actor = new Key1(tile.x, tile.y, this.mapSpriteSheet);
+                 this.add(actor);
+            }
+            else{
+                console.log("title.id = " + tile.id);
             }
         }
         
@@ -34,21 +72,6 @@ export class ProtoTypeRoom extends ex.Scene {
         this.add(this.player);
         this.handleInput(engine);
     }
-
-    // private createRandomRoom() {
-    //     let cellRowCount = 30;
-    //     let cellColCount = 60;
-
-    //     for (let i = 0; i < 250; i++) {
-
-    //         let cellRow = Math.floor(Math.random() * cellRowCount);
-    //         let cellCol = Math.floor(Math.random() * cellColCount);
-
-    //         const block = new Block1(cellRow, cellCol);
-    //         this.add(block);
-    //         this.blocks.push(block);
-    //     }
-    // }
 
     private handleInput(engine: ex.Engine<any>) {
         engine.input.keyboard.on("hold", (evt) => {

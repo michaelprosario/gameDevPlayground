@@ -4,7 +4,7 @@ import { ProtoTypeRoom } from "./scenes/prototype-room";
 
 class Game extends Engine {
     constructor() {
-      super({width: 800, height: 400});
+      super({width: 1200, height: 700});
     }
     initialize() {
 

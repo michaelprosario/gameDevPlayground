@@ -1,8 +1,7 @@
 import { Actor, CollisionType, vec } from "excalibur";
-import { Resources } from "../resources";
 import { GameConstants } from "../game-constants";
 
-export class Block1 extends Actor
+export class Coin1 extends Actor
 {
     constructor(
         public x: number, 
@@ -19,10 +18,6 @@ export class Block1 extends Actor
     }
 
     onInitialize() {
-        this.graphics.add(this.mapSpriteSheet.getSprite(4,1));
-        this.on('pointerup', () => {
-          alert('yo');
-        });
+        this.graphics.add(this.mapSpriteSheet.getSprite(3,1));
     }        
-
 }

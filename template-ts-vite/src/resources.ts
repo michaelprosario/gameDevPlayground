@@ -5,7 +5,7 @@ import redUp from "./images/redUp.png";
 import redDown from "./images/redDown.png";
 import redLeft from "./images/redLeft.png";
 import redRight from "./images/redRight.png";
-
+import mapSpritesImage from "./images/MegaPixelArt32x32pxIcons_SpriteSheet.png"
 
 export const Resources = {
   Sword: new ImageSource(sword),
@@ -13,7 +13,8 @@ export const Resources = {
   PlayerUp: new ImageSource(redUp),
   PlayerDown: new ImageSource(redDown),
   PlayerLeft: new ImageSource(redLeft),
-  PlayerRight: new ImageSource(redRight)
+  PlayerRight: new ImageSource(redRight),
+  MapSpritesImage: new ImageSource(mapSpritesImage),
 } as const;
 
 export const loader = new Loader();

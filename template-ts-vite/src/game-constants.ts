@@ -1,4 +1,4 @@
 export class GameConstants
 {
-    static GridSize = 16;
+    static GridSize = 32;
 }
