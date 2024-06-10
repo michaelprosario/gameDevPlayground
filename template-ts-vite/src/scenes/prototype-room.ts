@@ -2,8 +2,8 @@ import * as ex from "excalibur";
 
 import { Block1 } from "../actors/block1";
 import { Player, PlayerDirection } from "../actors/player";
-import { SpriteFusionTileMapData } from "../sprite-fusion-tile-map-data";
-import { SpriteFusionTileMapLoader } from "../sprite-fusion-tile-map-loader";
+import { SpriteFusionTileMapData } from "../interfaces/sprite-fusion-tile-map-data";
+import { SpriteFusionTileMapLoader } from "../services/sprite-fusion-tile-map-loader";
 
 export class ProtoTypeRoom extends ex.Scene {
     block1!: Block1;

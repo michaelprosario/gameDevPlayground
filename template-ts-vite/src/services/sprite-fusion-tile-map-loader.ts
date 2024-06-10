@@ -1,4 +1,4 @@
-import { SpriteFusionTileMapData } from "./sprite-fusion-tile-map-data";
+import { SpriteFusionTileMapData } from "../interfaces/sprite-fusion-tile-map-data";
 
 
 // Class enables you to load map files from https://www.spritefusion.com/
