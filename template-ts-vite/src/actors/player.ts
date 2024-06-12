@@ -4,6 +4,7 @@ import { textChangeRangeIsUnchanged } from "typescript";
 import { IActorCommon, ActorType } from "../interfaces/actor-common";
 import { IPlayerEventHandler } from "../interfaces/player-event-handler";
 import { Coin1 } from "./coin1";
+import { Door1 } from "./door1";
 
 export enum PlayerState
 {
@@ -54,10 +55,17 @@ export class Player extends Actor implements IActorCommon
     this.on('postcollision', (event: PostCollisionEvent<Actor>) => {
 
       let otherActor = event.other as unknown as IActorCommon;
-      if (otherActor.actorType === ActorType.Coin1) 
-      {
-        // let the parent scene know about getting rid of the coin
-        this.playerEventHandler.collectCoin1(otherActor as Coin1)
+      
+      switch (otherActor.actorType) {
+        case ActorType.Coin1:
+          this.playerEventHandler.collectCoin1(otherActor as Coin1);
+          break;
+        case ActorType.Door1:
+          this.playerEventHandler.handleOpenDoor(otherActor as Door1);
+          break;
+        default:
+          // Handle cases where otherActor.actorType doesn't match any of the above
+          break;
       }
     });    
   }

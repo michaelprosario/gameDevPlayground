@@ -9,16 +9,9 @@ import { Door1 } from "../actors/door1";
 import { Coin1 } from "../actors/coin1";
 import { Key1 } from "../actors/key1";
 import { IPlayerEventHandler } from "../interfaces/player-event-handler";
+import { MapRoomTileType } from "./prototype-room";
 
-export class MapRoomTileType
-{
-    static BRICK_WALL = "18";
-    static DOOR1 = "117";
-    static COIN1 = "17";
-    static KEY1 = "373";
-}
-
-export class ProtoTypeRoom extends ex.Scene implements IPlayerEventHandler {
+export class ProtoTypeRoom2 extends ex.Scene implements IPlayerEventHandler {
     
     handleOpenDoor(door: Door1): void {
         console.log("open a door");
@@ -42,7 +35,7 @@ export class ProtoTypeRoom extends ex.Scene implements IPlayerEventHandler {
     {
         const tileMapLoader = new SpriteFusionTileMapLoader();
         let tileMapData: SpriteFusionTileMapData
-        tileMapData = await tileMapLoader.loadTileMap("/src/maps/map2.json");
+        tileMapData = await tileMapLoader.loadTileMap("/src/maps/map3.json");
         console.log(tileMapData);
 
         this.mapSpriteSheet = ex.SpriteSheet.fromImageSource({

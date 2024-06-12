@@ -9,7 +9,8 @@ export class Door1 extends Actor implements IActorCommon
     constructor(
         public x: number, 
         public y: number,
-        private mapSpriteSheet: ex.SpriteSheet
+        private mapSpriteSheet: ex.SpriteSheet,
+        public sceneToLoad: string
     )
     {
         super({
