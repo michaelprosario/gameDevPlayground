@@ -8,6 +8,7 @@ import { Resources } from "../resources";
 import { Door1 } from "../actors/door1";
 import { Coin1 } from "../actors/coin1";
 import { Key1 } from "../actors/key1";
+import { IPlayerEventHandler } from "../interfaces/player-event-handler";
 
 export class MapRoomTileType
 {
@@ -17,7 +18,16 @@ export class MapRoomTileType
     static KEY1 = "373";
 }
 
-export class ProtoTypeRoom extends ex.Scene {
+export class ProtoTypeRoom extends ex.Scene implements IPlayerEventHandler {
+    
+    collectCoin1(aCoin: Coin1): void 
+    {
+        aCoin.kill();
+        this.player.coinCount += 1;
+        
+        console.log("coin count = " + this.player.coinCount)
+    }
+
     block1!: Block1;
     player!: Player;
     mapSpriteSheet!: ex.SpriteSheet;
@@ -68,7 +78,8 @@ export class ProtoTypeRoom extends ex.Scene {
         
         // this.createRandomRoom();             
 
-        this.player = new Player();
+        this.player = new Player(this);
+      
         this.add(this.player);
         this.handleInput(engine);
     }

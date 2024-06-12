@@ -1,8 +1,11 @@
 import { Actor, CollisionType, vec } from "excalibur";
 import { GameConstants } from "../game-constants";
+import { IActorCommon, ActorType } from "../interfaces/actor-common";
 
-export class Key1 extends Actor
+export class Key1 extends Actor implements IActorCommon
 {
+    actorType: ActorType = ActorType.Key1;
+    
     constructor(
         public x: number, 
         public y: number,

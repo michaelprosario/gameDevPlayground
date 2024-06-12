@@ -1,9 +1,11 @@
 import { Actor, CollisionType, vec } from "excalibur";
-import { Resources } from "../resources";
 import { GameConstants } from "../game-constants";
+import { ActorType, IActorCommon } from "../interfaces/actor-common";
 
-export class Block1 extends Actor
+export class Block1 extends Actor implements IActorCommon
 {
+    actorType: ActorType = ActorType.Block1;
+
     constructor(
         public x: number, 
         public y: number,

@@ -1,5 +1,9 @@
-import { Actor, CollisionType, Sprite, Vector, vec } from "excalibur";
+import { Actor, CollisionType, PostCollisionEvent, Sprite, Vector, vec } from "excalibur";
 import { Resources } from "../resources";
+import { textChangeRangeIsUnchanged } from "typescript";
+import { IActorCommon, ActorType } from "../interfaces/actor-common";
+import { IPlayerEventHandler } from "../interfaces/player-event-handler";
+import { Coin1 } from "./coin1";
 
 export enum PlayerState
 {
@@ -11,7 +15,9 @@ export enum PlayerDirection
   Up, Left, Right, Down
 }
 
-export class Player extends Actor {
+export class Player extends Actor implements IActorCommon
+{
+  actorType: ActorType = ActorType.Player;
 
   state!: PlayerState;
   direction!: PlayerDirection;
@@ -19,8 +25,9 @@ export class Player extends Actor {
   playerDownSprite!: Sprite;
   playerLeftSprite!: Sprite;
   playerRightSprite!: Sprite;
+  coinCount: number = 0;
 
-  constructor()
+  constructor(private playerEventHandler: IPlayerEventHandler)
   {
       super({
           pos: vec(60, 60),
@@ -28,6 +35,7 @@ export class Player extends Actor {
           height: 16, 
           collisionType: CollisionType.Active
       })
+
   }
 
   onInitialize() 
@@ -42,6 +50,16 @@ export class Player extends Actor {
     this.playerRightSprite = Resources.PlayerRight.toSprite();
 
     this.graphics.add(this.playerDownSprite);
+
+    this.on('postcollision', (event: PostCollisionEvent<Actor>) => {
+
+      let otherActor = event.other as unknown as IActorCommon;
+      if (otherActor.actorType === ActorType.Coin1) 
+      {
+        // let the parent scene know about getting rid of the coin
+        this.playerEventHandler.collectCoin1(otherActor as Coin1)
+      }
+    });    
   }
 
   movePlayerInDirection(direction: PlayerDirection) {
