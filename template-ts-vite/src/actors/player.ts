@@ -16,6 +16,27 @@ export enum PlayerDirection
   Up, Left, Right, Down
 }
 
+export class PlayerData
+{
+  coinCount: number = 0;
+  getCountCount() 
+  {
+    return this.coinCount;
+  }
+
+  addCoins(x: number) 
+  {
+    this.coinCount += x;
+  }
+  
+
+  constructor()
+  {
+
+  }
+
+}
+
 export class Player extends Actor implements IActorCommon
 {
   actorType: ActorType = ActorType.Player;
@@ -26,7 +47,6 @@ export class Player extends Actor implements IActorCommon
   playerDownSprite!: Sprite;
   playerLeftSprite!: Sprite;
   playerRightSprite!: Sprite;
-  coinCount: number = 0;
 
   constructor(private playerEventHandler: IPlayerEventHandler)
   {

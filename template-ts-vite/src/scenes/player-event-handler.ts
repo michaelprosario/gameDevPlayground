@@ -1,6 +1,6 @@
 import { Coin1 } from "../actors/coin1";
 import { Door1 } from "../actors/door1";
-import { Player } from "../actors/player";
+import { Player, PlayerData } from "../actors/player";
 import { IPlayerEventHandler } from "../interfaces/player-event-handler";
 
 export class PlayerEventHandler implements IPlayerEventHandler
@@ -8,7 +8,8 @@ export class PlayerEventHandler implements IPlayerEventHandler
     private player!: Player;
 
     constructor(
-        private engine: ex.Engine
+        private engine: ex.Engine, 
+        private playerData: PlayerData
     )
     {
 
@@ -28,8 +29,8 @@ export class PlayerEventHandler implements IPlayerEventHandler
     collectCoin1(aCoin: Coin1): void 
     {
         aCoin.kill();
-        this.player.coinCount += 1;        
-        console.log("coin count = " + this.player.coinCount)
+        this.playerData.addCoins(1);
+        console.log("coin count = " + this.playerData.getCountCount())
     }
 
 }

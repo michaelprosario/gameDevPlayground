@@ -1,10 +1,8 @@
 import * as ex from "excalibur";
 
 import { Block1 } from "../actors/block1";
-import { Player, PlayerDirection } from "../actors/player";
-import { SpriteFusionTileMapData, Tile } from "../interfaces/sprite-fusion-tile-map-data";
-import { SpriteFusionTileMapLoader } from "../services/sprite-fusion-tile-map-loader";
-import { Resources } from "../resources";
+import { Player, PlayerData, PlayerDirection } from "../actors/player";
+import { Tile } from "../interfaces/sprite-fusion-tile-map-data";
 import { Door1 } from "../actors/door1";
 import { Coin1 } from "../actors/coin1";
 import { Key1 } from "../actors/key1";
@@ -16,11 +14,17 @@ export class BaseRoom extends ex.Scene {
     player!: Player;
     mapSpriteSheet!: ex.SpriteSheet;
     playerEventHandler!: PlayerEventHandler;
+    playerData!: PlayerData;
 
     async onInitialize(engine: ex.Engine) 
     {
         console.log(engine);
         // override this method
+    }
+
+    setPlayerData(playerData: PlayerData)
+    {
+        this.playerData = playerData;
     }
 
     makeTiles(tile: Tile) {

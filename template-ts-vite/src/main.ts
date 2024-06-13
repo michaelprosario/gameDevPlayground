@@ -2,6 +2,7 @@ import { Engine } from "excalibur";
 import { loader } from "./resources";
 import { ProtoTypeRoom } from "./scenes/prototype-room";
 import { ProtoTypeRoom2 } from "./scenes/prototype-room2";
+import { PlayerData } from "./actors/player";
 
 class Game extends Engine {
     constructor() {
@@ -9,10 +10,13 @@ class Game extends Engine {
     }
     initialize() {
 
+      let playerData = new PlayerData();
       const protoTypeRoom = new ProtoTypeRoom();
+      protoTypeRoom.setPlayerData(playerData);
       this.addScene("main", protoTypeRoom);
 
       const prototypeRoom2 = new ProtoTypeRoom2();
+      prototypeRoom2.setPlayerData(playerData);
       this.addScene("room2", prototypeRoom2);
       this.goToScene("main");
 

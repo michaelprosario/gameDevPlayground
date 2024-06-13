@@ -15,7 +15,7 @@ export class ProtoTypeRoom extends BaseRoom {
         let tileMapData: SpriteFusionTileMapData
         tileMapData = await tileMapLoader.loadTileMap("/src/maps/map2.json");
 
-        this.playerEventHandler = new PlayerEventHandler(this.engine);
+        this.playerEventHandler = new PlayerEventHandler(this.engine, this.playerData);
         this.player = new Player(this.playerEventHandler);
         this.playerEventHandler.setPlayer(this.player);
         this.add(this.player);

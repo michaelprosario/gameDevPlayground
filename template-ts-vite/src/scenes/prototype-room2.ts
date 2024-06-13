@@ -1,8 +1,7 @@
 import * as ex from "excalibur";
 
-import { Block1 } from "../actors/block1";
-import { Player, PlayerDirection } from "../actors/player";
-import { SpriteFusionTileMapData, Tile } from "../interfaces/sprite-fusion-tile-map-data";
+import { Player } from "../actors/player";
+import { SpriteFusionTileMapData } from "../interfaces/sprite-fusion-tile-map-data";
 import { SpriteFusionTileMapLoader } from "../services/sprite-fusion-tile-map-loader";
 import { Resources } from "../resources";
 import { BaseRoom } from "./base-room";
@@ -32,7 +31,7 @@ export class ProtoTypeRoom2 extends BaseRoom {
             this.makeTiles(tile);
         }
         
-        this.playerEventHandler = new PlayerEventHandler(this.engine);
+        this.playerEventHandler = new PlayerEventHandler(this.engine, this.playerData);
         this.player = new Player(this.playerEventHandler);
         this.playerEventHandler.setPlayer(this.player);
         this.add(this.player);
