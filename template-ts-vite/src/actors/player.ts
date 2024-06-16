@@ -1,6 +1,5 @@
 import { Actor, CollisionType, PostCollisionEvent, Sprite, Vector, vec } from "excalibur";
 import { Resources } from "../resources";
-import { textChangeRangeIsUnchanged } from "typescript";
 import { IActorCommon, ActorType } from "../interfaces/actor-common";
 import { IPlayerEventHandler } from "../interfaces/player-event-handler";
 import { Coin1 } from "./coin1";
@@ -29,12 +28,10 @@ export class PlayerData
     this.coinCount += x;
   }
   
-
   constructor()
   {
 
   }
-
 }
 
 export class Player extends Actor implements IActorCommon
@@ -52,8 +49,8 @@ export class Player extends Actor implements IActorCommon
   {
       super({
           pos: vec(60, 60),
-          width: 16,
-          height: 16, 
+          width: 32,
+          height: 32, 
           collisionType: CollisionType.Active
       })
 
